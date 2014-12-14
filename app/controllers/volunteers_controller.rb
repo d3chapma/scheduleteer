@@ -14,13 +14,15 @@ class VolunteersController < ApplicationController
 
   # GET /volunteers/new
   def new
-    @event = Event.find(event_id)
+    @event  = Event.find(event_id)
+    @jobs   = @event.jobs
     @volunteer = Volunteer.new
   end
 
   # GET /volunteers/1/edit
   def edit
     @event  = Event.find(event_id)
+    @jobs   = @event.jobs
   end
 
   # POST /volunteers
@@ -43,9 +45,10 @@ class VolunteersController < ApplicationController
   # PATCH/PUT /volunteers/1
   # PATCH/PUT /volunteers/1.json
   def update
+    @event = Event.find(event_id)
     respond_to do |format|
       if @volunteer.update(volunteer_params)
-        format.html { redirect_to @volunteer, notice: 'Volunteer was successfully updated.' }
+        format.html { redirect_to event_path(@event), notice: 'Volunteer was successfully updated.' }
         format.json { render :show, status: :ok, location: @volunteer }
       else
         format.html { render :edit }
@@ -73,7 +76,7 @@ class VolunteersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def volunteer_params
-      params.require(:volunteer).permit(:name, :event_id)
+      params.require(:volunteer).permit(:name, :event_id, job_ids: [])
     end
 
     def event_id

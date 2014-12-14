@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @schedule.event.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @schedule.name %>
+</p>
+
+<p>
+  <strong>Start on:</strong>
+  <%= @schedule.start_on %>
+</p>
+
+<p>
+  <strong>End on:</strong>
+  <%= @schedule.end_on %>
+</p>
+
+<%= link_to 'Edit', edit_event_schedule_path(@event, @schedule) %> |
+<%= link_to 'Back', event_path(@event) %>

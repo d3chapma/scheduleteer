@@ -12,6 +12,7 @@ class EventsController < ApplicationController
   def show
     @volunteers = @event.volunteers
     @jobs       = @event.jobs
+    @schedules  = @event.schedules
   end
 
   # GET /events/new

@@ -62,7 +62,6 @@ Schedule
 --------
 ```
 has_many days
-has_many
 
 belongs_to Event
 
@@ -82,12 +81,12 @@ belongs_to Schedule
 date date
 ```
 
-| id | date       |
-|----|------------|
-| 1  | January 4  |
-| 2  | January 11 |
-| 3  | January 18 |
-| 4  | January 25 |
+| id | date       | schedule_id |
+|----|------------|-------------|
+| 1  | January 4  | 1           |
+| 2  | January 11 | 1           |
+| 3  | January 18 | 1           |
+| 4  | January 25 | 1           |
 
 Assignment
 ----------
