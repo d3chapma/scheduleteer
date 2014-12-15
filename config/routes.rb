@@ -10,4 +10,11 @@ Rails.application.routes.draw do
     resources :schedules
   end
 
+  resources :assignments, only: [] do
+    member do
+      put :toggle_absent
+      put :toggle_confirmed
+    end
+  end
+
 end

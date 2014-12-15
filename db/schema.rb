@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214174451) do
+ActiveRecord::Schema.define(version: 20141214180534) do
+
+  create_table "assignments", force: true do |t|
+    t.integer  "score"
+    t.boolean  "confirmed",    default: false
+    t.boolean  "absent",       default: false
+    t.integer  "volunteer_id"
+    t.integer  "day_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assignments", ["day_id"], name: "index_assignments_on_day_id"
+  add_index "assignments", ["job_id"], name: "index_assignments_on_job_id"
+  add_index "assignments", ["volunteer_id"], name: "index_assignments_on_volunteer_id"
 
   create_table "days", force: true do |t|
     t.date     "date"

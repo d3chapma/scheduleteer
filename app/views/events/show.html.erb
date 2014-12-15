@@ -1,92 +1,122 @@
-<p id="notice"><%= notice %></p>
+<% content_for :breadcrumbs do %>
+  <li><%= link_to 'Events', events_path %></li>
+  <li><%= @event.name %></li>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<h1>Listing volunteers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @volunteers.each do |volunteer| %>
-      <tr>
-        <td><%= volunteer.name %></td>
-        <td><%= link_to 'Edit', edit_event_volunteer_path(@event, volunteer) %></td>
-        <td><%= link_to 'Destroy', [@event, volunteer], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <div class="small-12 column column-table-listing">
+    <%= link_to new_event_schedule_path(@event), class: 'button tiny' do %>
+      <%= icon('plus') %>
     <% end %>
-  </tbody>
-</table>
+    <h3>Schedules</h3>
 
-<br>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start on</th>
+          <th>End on</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Volunteer', new_event_volunteer_path(@event) %>
+      <tbody>
+        <% @schedules.each do |schedule| %>
+          <tr>
+            <td><%= schedule.name %></td>
+            <td><%= schedule.start_on %></td>
+            <td><%= schedule.end_on %></td>
+            <td><%= link_to 'Show', [@event, schedule] %></td>
+            <td><%= link_to 'Edit', edit_event_schedule_path(@event, schedule) %></td>
+            <td><%= link_to 'Destroy', [@event, schedule], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h1>Listing jobs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.name %></td>
-        <td><%= link_to 'Edit', edit_event_job_path(@event, job) %></td>
-        <td><%= link_to 'Destroy', [@event, job], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <div class="small-12">
+    <p id="notice"><%= notice %></p>
+  </div>
+  <div class="small-6 column column-table-listing">
+    <%= link_to new_event_volunteer_path(@event), class: 'button tiny' do %>
+      <%= icon('plus') %>
     <% end %>
-  </tbody>
-</table>
+    <h3>Volunteers</h3>
 
-<br>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Job', new_event_job_path(@event) %>
+      <tbody>
+        <% @volunteers.each do |volunteer| %>
+          <tr>
+            <td><%= volunteer.name %></td>
+            <td>
+              <%= link_to edit_event_volunteer_path(@event, volunteer) do %>
+                <%= icon('edit') %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to [@event, volunteer], method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <%= icon('trash') %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<h1>Listing schedules</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start on</th>
-      <th>End on</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @schedules.each do |schedule| %>
-      <tr>
-        <td><%= schedule.name %></td>
-        <td><%= schedule.start_on %></td>
-        <td><%= schedule.end_on %></td>
-        <td><%= link_to 'Show', [@event, schedule] %></td>
-        <td><%= link_to 'Edit', edit_event_schedule_path(@event, schedule) %></td>
-        <td><%= link_to 'Destroy', [@event, schedule], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="small-6 column column-table-listing">
+    <%= link_to new_event_job_path(@event), class: 'button tiny' do %>
+      <%= icon('plus') %>
     <% end %>
-  </tbody>
-</table>
+    <h3>Jobs</h3>
 
-<br>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Schedule', new_event_schedule_path(@event) %>
+      <tbody>
+        <% @jobs.each do |job| %>
+          <tr>
+            <td><%= job.name %></td>
+            <td>
+              <%= link_to edit_event_job_path(@event, job) do %>
+                <%= icon('edit') %>
+              <% end %>
+              </td>
+            <td>
+              <%= link_to [@event, job], method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <%= icon('trash') %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<br>
-<br>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<hr>
+<div class="row">
+  <div class="small-6 column">
+    <%= link_to "Edit #{@event.name}", edit_event_path(@event), class: 'button expand' %>
+  </div>
+  <div class="small-6 column">
+    <%= link_to "Destroy #{@event.name}", @event, method: :delete,
+            data: { confirm: 'Are you sure?' }, class: 'button alert expand' %>
+  </div>
+</div>

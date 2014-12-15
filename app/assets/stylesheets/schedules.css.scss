@@ -1,3 +1,90 @@
 // Place all the styles related to the schedules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.schedule {
+  table-layout: fixed;
+}
+
+.schedule-cell {
+  padding: 0;
+}
+
+.schedule-day-job {
+  min-height: 40px;
+  min-width: 90px;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+
+  &:hover {
+    border: 2px solid #999;
+  }
+}
+
+.schedule-day-job-selector {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 200px;
+  min-height: 50px;
+  border: 1px solid #ddd;
+  top: -2px;
+  left: -2px;
+  z-index: 10;
+  cursor: default;
+}
+
+.schedule-day-job-selector-assignment {
+  padding: 5px;
+
+  &.confirmed {
+    background-color: green;
+    color: white;
+  }
+
+  &.absent {
+    background-color: red;
+    color: white;
+  }
+
+  &:hover:not(.absent):not(.confirmed) {
+    background-color: #fafafa;
+  }
+}
+
+.schedule-day-job-confirmed-volunteer-actions {
+  float: right;
+  a {
+    color: black;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid white;
+    line-height: 16px;
+  }
+}
+
+.schedule-day-job-confirmed-volunteer-actions-confirm:hover,
+.schedule-day-job-confirmed-volunteer-actions-absent:hover {
+  background-color: green;
+  color: white;
+}
+
+.confirmed .schedule-day-job-confirmed-volunteer-actions-confirm:hover,
+.absent .schedule-day-job-confirmed-volunteer-actions-absent:hover {
+  background-color: red;
+  color: white;
+}
+
+.schedule-day-job-confirmed-volunteer {
+  padding: 5px;
+
+  &.absent {
+    background-color: red;
+    color: white;
+  }
+}

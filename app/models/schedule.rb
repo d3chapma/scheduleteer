@@ -8,4 +8,14 @@ class Schedule < ActiveRecord::Base
       days.create(date: date)
     end
   end
+
+  def add_assignments
+    days.each do |day|
+      event.jobs.each do |job|
+        job.volunteers.each do |volunteer|
+          Assignment.create(day: day, job: job, volunteer: volunteer)
+        end
+      end
+    end
+  end
 end

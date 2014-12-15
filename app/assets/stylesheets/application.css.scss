@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ @import 'foundation_and_overrides';
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+
+body {
+  padding-left: 12px;
+  padding-right: 12px;
+}

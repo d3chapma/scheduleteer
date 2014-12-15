@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
     Event.transaction do
       schedule = schedules.create(params)
       schedule.add_days
+      schedule.add_assignments
       schedule
     end
   end

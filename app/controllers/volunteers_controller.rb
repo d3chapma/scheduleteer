@@ -51,6 +51,7 @@ class VolunteersController < ApplicationController
         format.html { redirect_to event_path(@event), notice: 'Volunteer was successfully updated.' }
         format.json { render :show, status: :ok, location: @volunteer }
       else
+        @jobs = @event.jobs
         format.html { render :edit }
         format.json { render json: @volunteer.errors, status: :unprocessable_entity }
       end

@@ -1,26 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Event:</strong>
-  <%= @schedule.event.name %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @schedule.name %>
-</p>
-
-<p>
-  <strong>Start on:</strong>
-  <%= @schedule.start_on %>
-</p>
-
-<p>
-  <strong>End on:</strong>
-  <%= @schedule.end_on %>
-</p>
-
-<table>
+<table class='schedule'>
   <thead>
     <tr>
       <th></th>
@@ -33,13 +11,41 @@
     <% @schedule.days.each do |day| %>
       <tr>
         <td><%= day.date.strftime('%b %d') %></td>
-        <% @event.jobs.count.times do %>
-          <td></td>
+        <% @event.jobs.each do |job| %>
+          <% assignments = Assignment.includes(:volunteer).where(job: job, day: day) %>
+          <td class='schedule-cell'>
+            <div class="schedule-day-job">
+              <div class="schedule-day-job-confirmed">
+                <% assignments.confirmed.each do |confirmed| %>
+                  <% confirmed_class = confirmed.absent ? 'absent' : '' %>
+                  <div class="schedule-day-job-confirmed-volunteer <%= confirmed_class %>">
+                    <%= confirmed.volunteer.name %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="schedule-day-job-selector">
+                <% assignments.each do |assignment| %>
+                  <% assignment_class = assignment.confirmed ? 'confirmed ' : '' %>
+                  <% assignment_class += assignment.absent ? 'absent ' : '' %>
+                  <div class="schedule-day-job-selector-assignment <%= assignment_class %>">
+                    <div class="schedule-day-job-confirmed-volunteer-actions">
+                      <%= link_to toggle_confirmed_assignment_path(assignment), method: :put, class: 'schedule-day-job-confirmed-volunteer-actions-confirm' do %>
+                        <%= icon('check') %>
+                      <% end %>
+                      <%= link_to toggle_absent_assignment_path(assignment), method: :put, class: 'schedule-day-job-confirmed-volunteer-actions-absent' do %>
+                        <%= icon('times') %>
+                      <% end %>
+                    </div>
+                    <%= assignment.volunteer.name %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_event_schedule_path(@event, @schedule) %> |
 <%= link_to 'Back', event_path(@event) %>
