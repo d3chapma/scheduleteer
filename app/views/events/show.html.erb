@@ -3,6 +3,10 @@
   <li><%= @event.name %></li>
 <% end %>
 
+<div class="small-12">
+  <p id="notice"><%= notice %></p>
+</div>
+
 <div class="row">
   <div class="small-12 column column-table-listing">
     <%= link_to new_event_schedule_path(@event), class: 'button tiny' do %>
@@ -44,9 +48,6 @@
 </div>
 
 <div class="row">
-  <div class="small-12">
-    <p id="notice"><%= notice %></p>
-  </div>
   <div class="small-6 column column-table-listing">
     <%= link_to new_event_volunteer_path(@event), class: 'button tiny' do %>
       <%= icon('plus') %>
