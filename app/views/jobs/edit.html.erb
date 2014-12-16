@@ -1,5 +1,11 @@
-<h1>Editing job</h1>
+<% content_for :breadcrumbs do %>
+  <li><%= link_to 'Events', events_path %></li>
+  <li><%= link_to @event.name, event_path(@event) %></li>
+  <li>Editing <%= @job.name %></li>
+<% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', event_path(@event) %>
+<div class="row">
+  <div class="small-6 small-offset-3">
+    <%= render 'form' %>
+  </div>
+</div>

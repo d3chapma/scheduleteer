@@ -23,7 +23,7 @@ class AssignmentsController < ApplicationController
     @event    = @schedule.event
     new_absent = !@assignment.absent
     respond_to do |format|
-      if @assignment.update(absent: new_absent)
+      if @assignment.update_absence(new_absent)
         format.html { redirect_to [@event, @schedule], notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
