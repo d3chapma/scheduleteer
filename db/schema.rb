@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141214180534) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assignments", force: true do |t|
     t.integer  "score"
     t.boolean  "confirmed",    default: false
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20141214180534) do
     t.datetime "updated_at"
   end
 
-  add_index "assignments", ["day_id"], name: "index_assignments_on_day_id"
-  add_index "assignments", ["job_id"], name: "index_assignments_on_job_id"
-  add_index "assignments", ["volunteer_id"], name: "index_assignments_on_volunteer_id"
+  add_index "assignments", ["day_id"], name: "index_assignments_on_day_id", using: :btree
+  add_index "assignments", ["job_id"], name: "index_assignments_on_job_id", using: :btree
+  add_index "assignments", ["volunteer_id"], name: "index_assignments_on_volunteer_id", using: :btree
 
   create_table "days", force: true do |t|
     t.date     "date"
@@ -35,10 +38,11 @@ ActiveRecord::Schema.define(version: 20141214180534) do
     t.datetime "updated_at"
   end
 
-  add_index "days", ["schedule_id"], name: "index_days_on_schedule_id"
+  add_index "days", ["schedule_id"], name: "index_days_on_schedule_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "name"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,7 +54,7 @@ ActiveRecord::Schema.define(version: 20141214180534) do
     t.datetime "updated_at"
   end
 
-  add_index "jobs", ["event_id"], name: "index_jobs_on_event_id"
+  add_index "jobs", ["event_id"], name: "index_jobs_on_event_id", using: :btree
 
   create_table "jobs_volunteers", id: false, force: true do |t|
     t.integer "job_id"
@@ -66,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141214180534) do
     t.string   "name"
   end
 
-  add_index "schedules", ["event_id"], name: "index_schedules_on_event_id"
+  add_index "schedules", ["event_id"], name: "index_schedules_on_event_id", using: :btree
 
   create_table "volunteers", force: true do |t|
     t.string   "name"
@@ -75,6 +79,6 @@ ActiveRecord::Schema.define(version: 20141214180534) do
     t.datetime "updated_at"
   end
 
-  add_index "volunteers", ["event_id"], name: "index_volunteers_on_event_id"
+  add_index "volunteers", ["event_id"], name: "index_volunteers_on_event_id", using: :btree
 
 end
