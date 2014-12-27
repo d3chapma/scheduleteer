@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= f.input :name %>
+  <%= f.input :name, autofocus: true %>
   <%= f.association :jobs, collection: @jobs %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: 'button' %>
 <% end %>

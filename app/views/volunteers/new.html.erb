@@ -1,5 +1,9 @@
-<h1>New volunteer</h1>
+<% content_for :breadcrumbs do %>
+  <li><%= link_to 'Events', events_path %></li>
+  <li><%= link_to @event.name, event_path(@event) %></li>
+  <li>New Volunteer</li>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', event_path(@event) %>
+<%= link_to 'Cancel', event_path(@event), class: 'button alert tiny' %>
