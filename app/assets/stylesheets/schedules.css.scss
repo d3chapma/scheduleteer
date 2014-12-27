@@ -8,18 +8,24 @@ table.schedule {
 
 .schedule-cell {
   padding: 0;
+  border: 2px solid transparent;
+  vertical-align: top;
+  position: relative;
+
+  &:hover {
+    border: 2px solid #999;
+    cursor: pointer;
+  }
 }
 
 .schedule-day-job {
   min-height: 36px;
   min-width: 90px;
-  cursor: pointer;
-  position: relative;
-  border: 2px solid transparent;
+}
 
-  &:hover {
-    border: 2px solid #999;
-  }
+.date-column {
+  width: 70px;
+  background-color: #ddd;
 }
 
 .schedule-day-job-selector {
@@ -33,6 +39,7 @@ table.schedule {
   left: -2px;
   z-index: 10;
   cursor: default;
+  box-shadow: 2px 2px 9px #aaa;
 }
 
 .schedule-day-job-selector-assignment {

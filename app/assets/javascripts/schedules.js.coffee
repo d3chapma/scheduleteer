@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'click', '.schedule-day-job', (event) ->
+$(document).on 'click', '.schedule-cell', (event) ->
   $('.schedule-day-job-selector').hide()
   $(this).find('.schedule-day-job-selector').show()
   event.preventDefault()

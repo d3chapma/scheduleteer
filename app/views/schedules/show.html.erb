@@ -9,7 +9,7 @@
     <table class='schedule'>
       <thead>
         <tr>
-          <th></th>
+          <th class="date-column"></th>
           <% @event.jobs.each do |job| %>
             <th><%= job.name %></th>
           <% end %>
@@ -18,7 +18,7 @@
       <tbody>
         <% @schedule.days.each do |day| %>
           <tr>
-            <td><%= day.date.strftime('%b %d') %></td>
+            <td class="date-column"><%= day.date.strftime('%b %d') %></td>
             <% @event.jobs.each do |job| %>
               <% assignments = Assignment.includes(:volunteer).where(job: job, day: day) %>
               <td class='schedule-cell'>
