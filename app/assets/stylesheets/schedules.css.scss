@@ -4,10 +4,16 @@
 
 table.schedule {
   table-layout: fixed;
+  border-spacing: 1px;
+
+  thead th {
+    padding: 4px;
+    text-align: center;
+  }
 }
 
 .schedule-cell {
-  padding: 0;
+  padding: 2px;
   border: 2px solid transparent;
   vertical-align: top;
   position: relative;
@@ -18,7 +24,7 @@ table.schedule {
   }
 }
 
-.schedule-day-job {
+td:not(.date-column) .schedule-day-job {
   min-height: 36px;
   min-width: 90px;
 }
@@ -88,7 +94,7 @@ table.schedule {
 }
 
 .schedule-day-job-confirmed-volunteer {
-  padding: 5px;
+  padding: 1px;
 
   &.absent {
     background-color: red;

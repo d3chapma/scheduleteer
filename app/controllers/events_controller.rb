@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @volunteers = @event.volunteers
+    @volunteers = @event.volunteers.alphabetically
     @jobs       = @event.jobs
     @schedules  = @event.schedules
   end

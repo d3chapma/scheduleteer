@@ -6,7 +6,9 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    event = events(:one)
+
+    get :index, event_id: event.id
     assert_response :success
     assert_not_nil assigns(:jobs)
   end
@@ -17,6 +19,7 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should create job" do
+
     assert_difference('Job.count') do
       post :create, job: { event_id: @job.event_id, name: @job.name }
     end

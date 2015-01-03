@@ -1,0 +1,47 @@
+<% if cell.data.kind_of?(Hash) %>
+  <td class="date-column schedule-cell">
+    <div class="schedule-day-job">
+      <%= cell.data[:day].formatted_date %>
+    </div>
+    <div class="schedule-day-job-selector">
+      <% cell.data[:assignments].each do |assignment| %>
+        <% assignment_class = assignment.absent ? 'absent ' : '' %>
+
+        <div class="schedule-day-job-selector-assignment <%= assignment_class %>">
+          <div class="schedule-day-job-confirmed-volunteer-actions">
+            <%= link_to toggle_absent_assignment_path(assignment), method: :put, class: 'schedule-day-job-confirmed-volunteer-actions-absent' do %>
+              <%= icon('times') %>
+            <% end %>
+          </div>
+          <%= assignment.volunteer.name %>
+        </div>
+      <% end %>
+    </div>
+  </td>
+<% else %>
+  <td class='schedule-cell'>
+    <div class="schedule-day-job">
+      <div class="schedule-day-job-confirmed">
+        <% confirmed(cell.data).each do |confirmed| %>
+          <div class="schedule-day-job-confirmed-volunteer">
+            <%= confirmed.volunteer.display_name %>
+          </div>
+        <% end %>
+      </div>
+      <div class="schedule-day-job-selector">
+        <% cell.data.each do |assignment| %>
+          <% assignment_class = assignment.confirmed ? 'confirmed ' : '' %>
+          <div class="schedule-day-job-selector-assignment <%= assignment_class %>">
+            <div class="schedule-day-job-confirmed-volunteer-actions">
+              <%= link_to toggle_confirmed_assignment_path(assignment), method: :put, class: 'schedule-day-job-confirmed-volunteer-actions-confirm' do %>
+                <%= icon('check') %>
+              <% end %>
+            </div>
+            <%= assignment.volunteer.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </td>
+<% end %>
+

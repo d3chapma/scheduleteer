@@ -1,6 +1,9 @@
 class Schedule < ActiveRecord::Base
   belongs_to :event
   has_many :days, dependent: :destroy
+  has_many :assignments, through: :days
+  has_many :jobs, through: :event
+  has_many :volunteers, through: :event
 
   def add_days
     dates = (start_on..end_on).select { |day| day.wday == 0 }

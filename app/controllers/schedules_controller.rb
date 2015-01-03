@@ -10,7 +10,9 @@ class SchedulesController < ApplicationController
   # GET /schedules/1
   # GET /schedules/1.json
   def show
-    @event = Event.find(event_id)
+    @event = Event.includes(:jobs).find(event_id)
+    table = Tablizer::Table.new(@schedule)
+    @table_data = table.tablize :assignments, {col: :job, row: :day}
   end
 
   # GET /schedules/new
